@@ -8,6 +8,9 @@ public class controlHeadSnake : MonoBehaviour
     public float speedMove;
     public float speedRotatet;
     GameObject headSnake;
+    public KeyCode left;
+    public KeyCode right;
+
     void Start()
     {
         headSnake = gameObject;
@@ -16,6 +19,14 @@ public class controlHeadSnake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //headSnake.GetComponent<GameObject>().transform.forward;
+        headSnake.transform.Translate(Vector3.forward * Time.deltaTime*speedMove);
+        if (Input.GetKey(left))
+        {
+            headSnake.transform.Rotate(Vector3.up, -speedRotatet * Time.deltaTime);
+        }
+        if(Input.GetKey(right))
+        {
+            headSnake.transform.Rotate(Vector3.up, speedRotatet * Time.deltaTime);
+        }
     }
 }
