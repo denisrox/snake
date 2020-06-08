@@ -474,8 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8983e5ba0964b4c4b81789d63ab4cc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMove: 5
-  speedRotatet: 150
+  movementSpeed: 5
+  rotationSpeed: 150
   left: 97
   right: 100
 --- !u!114 &525059506
@@ -492,6 +492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeSnake: 0
   bodySnakePrefab: {fileID: 83348064993340071, guid: b6d31cdfcade14846befb6bc00308ab0, type: 3}
+  head_snake: {fileID: 0}
   lastBody: {fileID: 0}
 --- !u!1 &705507993
 GameObject:

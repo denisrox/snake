@@ -7,9 +7,9 @@ public class BodyLogic : MonoBehaviour
     // Start is called before the first frame update
     public GameObject target;
     public GameObject head;
+    
     void Start()
-    {
-        
+    {        
     }
 
     // Update is called once per frame
@@ -20,8 +20,10 @@ public class BodyLogic : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        //При приближении к target замедляемся (чтобы не въезжать в target на поворотах, при снижении скорости)
         transform.LookAt(target.transform.position);
         if((target.transform.position - transform.position).magnitude > 0.8)
-            transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().speedMove); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
+            transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().movementSpeed); 
     }
 }
