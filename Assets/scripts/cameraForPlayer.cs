@@ -14,6 +14,6 @@ public class cameraForPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.transform.position + new Vector3(0, 10, 0); //камера всегда там же где игрок, но на 10 метров выше
+        transform.position = player.transform.position + new Vector3(0, 15, 0); //камера всегда там же где игрок, но на 10 метров выше
     }
 }
