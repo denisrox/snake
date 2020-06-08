@@ -15,6 +15,11 @@ public class BodyLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         transform.LookAt(target.transform.position);
         if((target.transform.position - transform.position).magnitude > 0.8)
             transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().speedMove); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
