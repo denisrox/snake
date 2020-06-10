@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         if (rangeBetweenDots == 0)
             rangeBetweenDots = 1;
         score = 0;
-        createGridSpawn();        
+        //createGridSpawn();        
     }
 
     // Update is called once per frame

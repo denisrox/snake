@@ -11,11 +11,14 @@ public class HeadControl : MonoBehaviour
     public KeyCode right;    
     private GameManager manager;
     private OnEatFood EatFood;
+    public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
+    public Vector3 previousVectorDirection;
     void Start()
     {
         
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         EatFood = gameObject.GetComponent<OnEatFood>();
+        previousVectorDirection = transform.forward; 
     }
 
     // Update is called once per frame
@@ -32,6 +35,13 @@ public class HeadControl : MonoBehaviour
         {
             transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);//поворот направо
         }
+        
+        if(previousVectorDirection!=transform.forward && GetComponent<OnEatFood>().lastBody!=gameObject)
+        {
+            Debug.Log(transform.forward);
+            pointsTrajectory.Enqueue(transform.position);
+        }
+        previousVectorDirection = transform.forward;
     }
     void OnTriggerEnter(Collider other) //обработка коллизии с объектов
     {
