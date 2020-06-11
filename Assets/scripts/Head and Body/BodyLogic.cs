@@ -50,19 +50,21 @@ public class BodyLogic : MonoBehaviour
         else
         {
             
-            if ((pointsTrajectory.Peek() - transform.position).magnitude/2f > (head.GetComponent<HeadControl>().movementSpeed * Time.deltaTime))
+            if (((pointsTrajectory.Peek() - transform.position).magnitude/2f > (head.GetComponent<HeadControl>().movementSpeed * Time.deltaTime)) 
+                && (target.transform.position - transform.position).magnitude > 0.8)
             {
                 transform.LookAt(pointsTrajectory.Peek());
-                transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().movementSpeed);
+                transform.Translate(Vector3.forward * Time.deltaTime * 2 * head.GetComponent<HeadControl>().movementSpeed);
             }
             else
             {
-                transform.position = pointsTrajectory.Dequeue();
-                /*for (int i = 0; i < 50; i++)
-                    if (pointsTrajectory.Count!=0 && ((pointsTrajectory.Peek() - transform.position).magnitude*2f < (head.GetComponent<HeadControl>().movementSpeed * Time.deltaTime))&& ((target.transform.position - transform.position).magnitude > 0.8))
-                        transform.position = pointsTrajectory.Dequeue();*/
-                while(pointsTrajectory.Count != 0 && ((pointsTrajectory.Peek() - transform.position).magnitude * 2f < (head.GetComponent<HeadControl>().movementSpeed * Time.deltaTime)) && ((target.transform.position - transform.position).magnitude > 0.8))
-                    transform.position = pointsTrajectory.Dequeue(); 
+                if((target.transform.position - transform.position).magnitude > 0.8)
+                    transform.position = pointsTrajectory.Dequeue();
+               
+                while(pointsTrajectory.Count != 0 && 
+                    ((pointsTrajectory.Peek() - transform.position).magnitude * 2f < (head.GetComponent<HeadControl>().movementSpeed * Time.deltaTime)) && 
+                    ((target.transform.position - transform.position).magnitude > 0.8f))
+                    transform.position = pointsTrajectory.Dequeue();
             }
                 
             

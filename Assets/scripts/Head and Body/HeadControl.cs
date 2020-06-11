@@ -8,7 +8,8 @@ public class HeadControl : MonoBehaviour
     public float movementSpeed;
     public float rotationSpeed;
     public KeyCode left;
-    public KeyCode right;    
+    public KeyCode right;
+    public KeyCode boostSpeed;
     private GameManager manager;
     private OnEatFood EatFood;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
@@ -24,19 +25,28 @@ public class HeadControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        transform.Translate(Vector3.forward * Time.deltaTime*movementSpeed); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
+        Vector3 moveDirection = transform.TransformDirection(Vector3.forward + Vector3.down) * movementSpeed * Time.deltaTime;
+        GetComponent<CharacterController>().Move(moveDirection);
+        //transform.Translate(Vector3.forward * Time.deltaTime*movementSpeed); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
 
         if (Input.GetKey(left))
         {
-            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);//поворот налево
+            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime * movementSpeed);//поворот налево
         }
         if(Input.GetKey(right))
         {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);//поворот направо
+            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime * movementSpeed);//поворот направо
         }
-        
-        if(previousVectorDirection!=transform.forward && GetComponent<OnEatFood>().lastBody!=gameObject)
+        if (Input.GetKeyDown(boostSpeed))
+        {
+            movementSpeed += 2;
+        }
+        if (Input.GetKeyUp(boostSpeed))
+        {
+            movementSpeed -= 2;
+        }
+
+        if (previousVectorDirection!=transform.forward && GetComponent<OnEatFood>().lastBody!=gameObject)
         {
             Debug.Log(transform.forward);
             pointsTrajectory.Enqueue(transform.position);

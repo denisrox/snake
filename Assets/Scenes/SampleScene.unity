@@ -475,9 +475,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  rotationSpeed: 150
+  rotationSpeed: 40
   left: 97
   right: 100
+  boostSpeed: 304
+  previousVectorDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &525059506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a79ecfb193aeb1439d64a2b9365bfa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeSnake: 0
   bodySnakePrefab: {fileID: 83348064993340071, guid: b6d31cdfcade14846befb6bc00308ab0, type: 3}
   head_snake: {fileID: 0}
   lastBody: {fileID: 0}
@@ -999,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  maxFood: 2
+  maxFood: 5
   countFood: 0
   rangeBetweenDots: 1
   prefabSpawnDot: {fileID: 6970395470828126028, guid: 02ae85ff4f6f0dc4d96ff10b51e9484d, type: 3}
