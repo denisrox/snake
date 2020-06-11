@@ -14,6 +14,7 @@ public class HeadControl : MonoBehaviour
     private OnEatFood EatFood;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
     public Vector3 previousVectorDirection;
+    public int countPointsTrajectory;
     void Start()
     {
         
@@ -46,11 +47,11 @@ public class HeadControl : MonoBehaviour
             movementSpeed -= 2;
         }
 
-        if (previousVectorDirection!=transform.forward && GetComponent<OnEatFood>().lastBody!=gameObject)
+        if (GetComponent<OnEatFood>().lastBody!=gameObject)
         {
-            Debug.Log(transform.forward);
             pointsTrajectory.Enqueue(transform.position);
         }
+        countPointsTrajectory = pointsTrajectory.Count;
         previousVectorDirection = transform.forward;
     }
     void OnTriggerEnter(Collider other) //обработка коллизии с объектов
