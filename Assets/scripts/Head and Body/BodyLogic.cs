@@ -8,6 +8,7 @@ public class BodyLogic : MonoBehaviour
     public GameObject target;
     public GameObject head;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
+    public Queue<Vector3> pointsTrajectory2 = new Queue<Vector3>();
     public Vector3 pointTrajectory;
     public bool isRotate = false;
 
@@ -41,11 +42,16 @@ public class BodyLogic : MonoBehaviour
                 pointsTrajectory.Enqueue(target.GetComponent<BodyLogic>().pointsTrajectory.Peek());
 
         //=============Начинаем двигаться вперед в зависимости от того, есть ли у нас очередь//
-        if (pointsTrajectory.Count == 0)
-        { 
-            transform.LookAt(target.transform.position);
-            if ((target.transform.position - transform.position).magnitude > 0.8)
-                transform.Translate(Vector3.forward * Time.deltaTime * 2* head.GetComponent<HeadControl>().movementSpeed);
+        if (pointsTrajectory.Count == 0 )
+        {
+            if ((target.transform.position - transform.position).magnitude > 0.8f)
+            {
+                transform.LookAt(target.transform.position);
+                transform.position = target.transform.position - target.transform.forward * 0.8f;
+            }
+            /*if ((target.transform.position - transform.position).magnitude > 0.8)
+                transform.Translate(Vector3.forward * Time.deltaTime * 2* head.GetComponent<HeadControl>().movementSpeed);*/
+            
         }
         else
         {
@@ -53,8 +59,12 @@ public class BodyLogic : MonoBehaviour
             if (((pointsTrajectory.Peek() - transform.position).magnitude/2f > (head.GetComponent<HeadControl>().movementSpeed * Time.deltaTime)) 
                 && (target.transform.position - transform.position).magnitude > 0.8)
             {
-                transform.LookAt(pointsTrajectory.Peek());
+                /*transform.LookAt(pointsTrajectory.Peek());  //сделать аналогично 49 строчке
+                transform.Translate(Vector3.forward * ((target.transform.position-transform.position).magnitude-0.8f));*/
+                transform.LookAt(pointsTrajectory.Peek());  //сделать аналогично 49 строчке
                 transform.Translate(Vector3.forward * Time.deltaTime * 2 * head.GetComponent<HeadControl>().movementSpeed);
+                /*transform.LookAt(target.transform.position);
+                transform.position = target.transform.position - target.transform.forward * 0.8f;*/
             }
             else
             {
@@ -70,4 +80,5 @@ public class BodyLogic : MonoBehaviour
             
         }
     }
+
 }
