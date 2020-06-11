@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoodLogic : MonoBehaviour
 {
-    public float speedRotatet;
+    public float rotationSpeed;
     public int foodPower;
     protected GameManager manager;
 
@@ -16,7 +16,7 @@ public class FoodLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(new Vector3(0, 1, 0), -speedRotatet * Time.deltaTime);//поворот налево. Но думаю это бред, это нужно делать анимацией, а не поворотом
+        transform.Rotate(new Vector3(0, 1, 0), -rotationSpeed * Time.deltaTime);//поворот налево. Но думаю это бред, это нужно делать анимацией, а не поворотом
     }
 
 

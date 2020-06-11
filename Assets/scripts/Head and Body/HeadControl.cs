@@ -11,7 +11,7 @@ public class HeadControl : MonoBehaviour
     public KeyCode right;
     public KeyCode boostSpeed;
     private GameManager manager;
-    private OnEatFood EatFood;
+    private OnEatFood onEatFood;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
     public Vector3 previousVectorDirection;
     public int countPointsTrajectory;
@@ -19,7 +19,7 @@ public class HeadControl : MonoBehaviour
     {
         
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        EatFood = gameObject.GetComponent<OnEatFood>();
+        onEatFood = gameObject.GetComponent<OnEatFood>();
         previousVectorDirection = transform.forward; 
     }
 
@@ -54,26 +54,30 @@ public class HeadControl : MonoBehaviour
         countPointsTrajectory = pointsTrajectory.Count;
         previousVectorDirection = transform.forward;
     }
-    void OnTriggerEnter(Collider other) //обработка коллизии с объектов
+    /*void OnTriggerEnter(Collider other) //обработка коллизии с объектов
     {
         //!ПРИ СПАВНЕ ИЗ ХВОСТА ТЕПЕРЬ ТАКАЯ РЕАЛИЗАЦИЯ НЕ ПОДХОДИТ!
         //проверяем, объект, в который мы врезались имеет ли тэг "Body" и так же
         //проверяем, не является ли это первое тело, которое идёт за головой
         //т.к. эта тело всегда контактирует с головой
-        /*if (other.gameObject.tag == "Body" && other.gameObject.GetComponent<BodyLogic>().target!=gameObject)
+        if (other.gameObject.tag == "Body" && other.gameObject.GetComponent<BodyLogic>().target!=gameObject)
         {                                                                                                   
-                                                                                                            
             if (manager.getPlayMode() == 0)
             {
-                EatFood.lastBody = other.gameObject.GetComponent<BodyLogic>().target;
-                EatFood.sizeSnake--;
-                Destroy(other.gameObject);
-            }
-            if (manager.getPlayMode() == 1)
+                     GameOver();         
+            }                                                                                                
+            /*if (manager.getPlayMode() == 1)
             {
-                 Time.timeScale = 0.5f;
-                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
-            }
-        }*/
+                onEatFood.lastBody = other.gameObject.GetComponent<BodyLogic>().target;
+                //OnEatFood.sizeSnake--;
+                Destroy(other.gameObject);
+            }            
+        }        
     }
+    private void GameOver()
+    {
+        movementSpeed = 0;
+        Time.timeScale = 0.5f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;    
+    }*/
 }

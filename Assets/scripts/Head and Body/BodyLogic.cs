@@ -32,7 +32,7 @@ public class BodyLogic : MonoBehaviour
             return;
         }
 
-        MoveBodyFour();
+        MoveBodyOne();
         //При приближении к target замедляемся (чтобы не въезжать в target на поворотах, при снижении скорости)
 
     }
