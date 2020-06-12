@@ -31,6 +31,12 @@ public class OnEatFood : MonoBehaviour
             //newBody.transform.Translate(Vector3.back*0.7f);
             newBody.GetComponent<BodyLogic>().target = lastBody; //даем новому объекту ссылку на последний элемент
             newBody.GetComponent<BodyLogic>().head = gameObject; //даем новому объекту ссылку на голову
+
+            
+            Material material = newBody.GetComponent<Renderer>().material;
+            material.color = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value, 1);
+            newBody.GetComponent<Renderer>().material = material;
+
             lastBody = newBody;
         }
     }
