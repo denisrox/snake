@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeadControl : MonoBehaviour
 {
     // Start is called before the first frame update
+    public float beginMovementSpeed;
     public float movementSpeed;
     public float rotationSpeed;
     public KeyCode left;
@@ -13,14 +14,11 @@ public class HeadControl : MonoBehaviour
     private GameManager manager;
     private OnEatFood onEatFood;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
-    public Vector3 previousVectorDirection;
-    public int countPointsTrajectory;
     void Start()
     {
-        
+        movementSpeed = beginMovementSpeed;
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         onEatFood = gameObject.GetComponent<OnEatFood>();
-        previousVectorDirection = transform.forward; 
     }
 
     // Update is called once per frame
@@ -29,6 +27,7 @@ public class HeadControl : MonoBehaviour
         Vector3 moveDirection = transform.TransformDirection(Vector3.forward + Vector3.down) * movementSpeed * Time.deltaTime;
         GetComponent<CharacterController>().Move(moveDirection);
         //transform.Translate(Vector3.forward * Time.deltaTime*movementSpeed); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
+        //GetComponent<CharacterController>().velocity.sqrMagnitude; скорось в квадрате
 
         if (Input.GetKey(left))
         {
@@ -40,19 +39,18 @@ public class HeadControl : MonoBehaviour
         }
         if (Input.GetKeyDown(boostSpeed))
         {
-            movementSpeed += 2;
+            movementSpeed = movementSpeed + beginMovementSpeed * 0.2f;
         }
         if (Input.GetKeyUp(boostSpeed))
         {
             movementSpeed -= 2;
         }
 
-        if (GetComponent<OnEatFood>().lastBody!=gameObject)
+        if (onEatFood.lastBody!=gameObject)
         {
             pointsTrajectory.Enqueue(transform.position);
         }
-        countPointsTrajectory = pointsTrajectory.Count;
-        previousVectorDirection = transform.forward;
+
     }
     /*void OnTriggerEnter(Collider other) //обработка коллизии с объектов
     {
