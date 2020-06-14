@@ -569,12 +569,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8983e5ba0964b4c4b81789d63ab4cc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginMovementSpeed: 0
+  beginMovementSpeed: 5
   movementSpeed: 5
   rotationSpeed: 40
   left: 97
   right: 100
   boostSpeed: 304
+  buffs: []
+  stamina: 10
+  staminaCurrent: 15
+  powerBoost: 0.5
 --- !u!114 &525059506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,6 +910,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 525059499}
+  minHeight: 8
+  maxHeight: 15
+  heightInitial: 10
+  speedChangingHeight: 1000
 --- !u!1 &1071622061
 GameObject:
   m_ObjectHideFlags: 0

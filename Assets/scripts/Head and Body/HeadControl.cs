@@ -14,8 +14,13 @@ public class HeadControl : MonoBehaviour
     private GameManager manager;
     private OnEatFood onEatFood;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
+    public List<GameObject> buffs = new List<GameObject>();
+    public float  stamina;
+    public float staminaCurrent;
+    public float powerBoost;
     void Start()
     {
+        staminaCurrent=stamina;
         movementSpeed = beginMovementSpeed;
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         onEatFood = gameObject.GetComponent<OnEatFood>();
@@ -39,11 +44,14 @@ public class HeadControl : MonoBehaviour
         }
         if (Input.GetKeyDown(boostSpeed))
         {
-            movementSpeed = movementSpeed + beginMovementSpeed * 0.2f;
+            BoostSpeedByShift comp= gameObject.AddComponent<BoostSpeedByShift>();
+            comp.powerBoost = powerBoost;
+            //movementSpeed = movementSpeed + beginMovementSpeed * 0.2f;
         }
         if (Input.GetKeyUp(boostSpeed))
         {
-            movementSpeed -= 2;
+            if (GetComponent<BoostSpeedByShift>())
+                GetComponent<BoostSpeedByShift>().deleteBuff();
         }
 
         if (onEatFood.lastBody!=gameObject)

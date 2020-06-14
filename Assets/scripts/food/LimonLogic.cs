@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodLogic : MonoBehaviour
+public class LimonLogic : MonoBehaviour
 {
     public float rotationSpeed;
     public int foodPower;
+    public float amountOfEnergyRecovered;
     protected GameManager manager;
-    
+
 
     void Start()
     {
@@ -25,6 +26,10 @@ public class FoodLogic : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")//проверяем, объект, который в нас врезался, имеет ли тег "Player"
         {
+            if(other.gameObject.GetComponent<HeadControl>().staminaCurrent< other.gameObject.GetComponent<HeadControl>().stamina- amountOfEnergyRecovered)
+                other.gameObject.GetComponent<HeadControl>().staminaCurrent += amountOfEnergyRecovered;
+            else
+                other.gameObject.GetComponent<HeadControl>().staminaCurrent = other.gameObject.GetComponent<HeadControl>().stamina;
             manager.addScore(foodPower); //добавляем счет
             manager.decreaseFoodCounter(); //убавляем количество нынешней еды в менеджере
             other.GetComponent<OnEatFood>().eat(foodPower); //запускаем метод роста змеи (наверное стоит переименовать метод в рост или типа того)
