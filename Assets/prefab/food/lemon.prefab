@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1550696892154965250}
   - component: {fileID: 1550696892154965249}
   - component: {fileID: 1550696892154965248}
-  - component: {fileID: -8903676677855924579}
+  - component: {fileID: -6448269955973546399}
   m_Layer: 0
   m_Name: lemon
   m_TagString: Untagged
@@ -98,7 +98,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8903676677855924579
+--- !u!114 &-6448269955973546399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,11 +107,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1550696892154965255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e79131e5ea98a44cbab79fc6028e8a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 02c606a35d25d4a43b52e611b87e8770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRotatet: 350
+  rotationSpeed: 0
   foodPower: 1
+  amountOfEnergyRecovered: 2
 --- !u!1001 &5169199626877858172
 PrefabInstance:
   m_ObjectHideFlags: 0

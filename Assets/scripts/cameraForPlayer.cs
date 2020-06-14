@@ -6,14 +6,52 @@ public class cameraForPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
+    public float minHeight;
+    public float maxHeight;
+    public float heightInitial;
+    public float speedChangingHeight;
+    public int cameraMode;
+    private float heightCurrent;
     void Start()
     {
-        
+        heightCurrent = heightInitial;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = player.transform.position + new Vector3(0, 15, 0); //камера всегда там же где игрок, но на 10 метров выше
+        if (cameraMode == 1)
+            modeCamOne();
+        else
+            modeCamTwo();
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            cameraMode = 1;
+            transform.eulerAngles = new Vector3(90f, 0, 0);
+        }
+
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            cameraMode = 2;
+        }
+
+    }
+    void modeCamOne()
+    {
+        transform.position = player.transform.position + new Vector3(0, heightCurrent, 0);
+        float changeHeight = Input.GetAxis("Mouse ScrollWheel")*-1;
+        Debug.Log(changeHeight);
+        heightCurrent += changeHeight * Time.deltaTime * speedChangingHeight; ;
+        heightCurrent = Mathf.Clamp(heightCurrent, minHeight, maxHeight);
+
+    }
+    void modeCamTwo()
+    {
+        transform.position = player.transform.position + player.transform.forward * -10  + new Vector3(0, heightCurrent, 0);
+        float changeHeight = Input.GetAxis("Mouse ScrollWheel") * -1;
+        Debug.Log(changeHeight);
+        heightCurrent += changeHeight * Time.deltaTime * speedChangingHeight; ;
+        heightCurrent = Mathf.Clamp(heightCurrent, minHeight, maxHeight);
+        transform.LookAt(player.transform);
     }
 }

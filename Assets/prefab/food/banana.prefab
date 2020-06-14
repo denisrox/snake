@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e79131e5ea98a44cbab79fc6028e8a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRotatet: 150
-  foodPower: 100
+  rotationSpeed: 0
+  foodPower: 3
 --- !u!1001 &7314349064832815022
 PrefabInstance:
   m_ObjectHideFlags: 0
