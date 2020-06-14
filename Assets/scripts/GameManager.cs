@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    // Тестовый коммент, чтобы как-то убрать дубликат GameManager
     [SerializeField] private int score; //очки
     [SerializeField] private int maxFood;//сколько может быть еды на поле
     [SerializeField] private int countFood;//сколько еды сейчас
