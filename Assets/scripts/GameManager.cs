@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         if (rangeBetweenDots == 0)
             rangeBetweenDots = 1;
         score = 0;
-        //createGridSpawn();        
+        createGridSpawn();        
     }
 
     // Update is called once per frame
@@ -69,9 +69,10 @@ public class GameManager : MonoBehaviour
         for (float  x= boundsPlaneMin.x+1; x < boundsPlaneMax.x-1; x += rangeBetweenDots) //!!!если поле будет не ровным - переделать
         {
             for (float z = boundsPlaneMin.z+1; z < boundsPlaneMax.z-1; z += rangeBetweenDots)
-            {
+            {                
                 Instantiate(prefabSpawnDot, new Vector3(x, boundsPlaneMax.y+0.5f, z), Quaternion.identity);
             }
         }
+
     }
 }
