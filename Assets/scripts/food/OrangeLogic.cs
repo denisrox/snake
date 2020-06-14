@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OragneLogic : MonoBehaviour
+public class OrangeLogic : MonoBehaviour
 {
 
     public float rotationSpeed;
@@ -23,16 +23,16 @@ public class OragneLogic : MonoBehaviour
             manager.addScore(foodPower); //добавляем счет
             manager.decreaseFoodCounter(); //убавляем количество нынешней еды в менеджере
             other.GetComponent<OnEatFood>().eat(foodPower); //запускаем метод роста змеи (наверное стоит переименовать метод в рост или типа того)
-            if (other.gameObject.GetComponent<FoodAcceleration>())
+            if (other.gameObject.GetComponent<BoostSpeedByFruit>())
             {
                 Debug.Log("такой баф есть");
-                other.gameObject.GetComponent<FoodAcceleration>().restarTheBuff();
+                other.gameObject.GetComponent<BoostSpeedByFruit>().buffStarting();
             }
 
             else
             {
                 Debug.Log("такого бафа нет");
-                FoodAcceleration comp = other.gameObject.AddComponent<FoodAcceleration>();
+                BoostSpeedByFruit comp = other.gameObject.AddComponent<BoostSpeedByFruit>();
                 comp.timeBuff = timeBuff;
                 comp.powerBoost = powerBoost;
             }

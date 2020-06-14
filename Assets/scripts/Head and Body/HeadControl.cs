@@ -36,11 +36,11 @@ public class HeadControl : MonoBehaviour
 
         if (Input.GetKey(left))
         {
-            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime * movementSpeed);//поворот налево
+            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);// * movementSpeed);//поворот налево
         }
         if(Input.GetKey(right))
         {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime * movementSpeed);//поворот направо
+            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);// * movementSpeed);//поворот направо
         }
         if (Input.GetKeyDown(boostSpeed))
         {

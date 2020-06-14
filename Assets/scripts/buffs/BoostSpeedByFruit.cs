@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodAcceleration : MonoBehaviour
+public class BoostSpeedByFruit : MonoBehaviour
 {
     // Start is called before the first frame update
     public float timeBuff;
@@ -19,15 +19,15 @@ public class FoodAcceleration : MonoBehaviour
     {
         timePassed += Time.deltaTime;
         if (timePassed > timeBuff)
-            deleteBuff();
+            buffEnding();
     }
-    public void restarTheBuff()
+    public void buffStarting()
     {
         timePassed = 0;
     }
-    public void deleteBuff()
+    public void buffEnding()
     {
         GetComponent<HeadControl>().movementSpeed -= GetComponent<HeadControl>().beginMovementSpeed * powerBoost;
-        Destroy(GetComponent<FoodAcceleration>());
+        Destroy(GetComponent<BoostSpeedByFruit>());
     }
 }
