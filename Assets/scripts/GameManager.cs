@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     // Тестовый коммент, чтобы как-то убрать дубликат GameManager
     [SerializeField] private int score; //очки
-    [SerializeField] private int maxFood;//сколько может быть еды на поле
+    [SerializeField] public int maxFood;//сколько может быть еды на поле
     [SerializeField] private int countFood;//сколько еды сейчас
     [SerializeField] private int rangeBetweenDots;//расстояние между точками спавна
     [SerializeField] private GameObject prefabSpawnDot;//спавн-точка
@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
     {
         if (countFood < maxFood)
         {
-            spawnFood();
+            //var a = new SpawnLogic.SpawnObject();
+            //spawnFood();
         }
             
     }
