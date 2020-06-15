@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class HeadControl : MonoBehaviour
@@ -53,12 +52,17 @@ public class HeadControl : MonoBehaviour
             if (GetComponent<BoostSpeedByShift>())
                 GetComponent<BoostSpeedByShift>().deleteBuff();
         }
+        
 
         if (onEatFood.lastBody!=gameObject)
         {
             pointsTrajectory.Enqueue(transform.position);
         }
 
+    }
+    public void turnHead(int directionToTurn)
+    {
+        transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime* directionToTurn);
     }
     /*void OnTriggerEnter(Collider other) //обработка коллизии с объектов
     {
