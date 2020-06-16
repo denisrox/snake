@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 1122270839}
   - component: {fileID: 1122270838}
   - component: {fileID: 1122270837}
+  - component: {fileID: 1122270840}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1106,6 +1107,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122270835}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1122270840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122270835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b6c900acf816fd4781a335cc9f9d8d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDotOccupied: 0
 --- !u!1 &1264198500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +1151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   maxFood: 5
-  countFood: 0
+  countFood: 2
   rangeBetweenDots: 0
   prefabSpawnDot: {fileID: 6970395470828126028, guid: 02ae85ff4f6f0dc4d96ff10b51e9484d, type: 3}
   foodsPrefabs:
