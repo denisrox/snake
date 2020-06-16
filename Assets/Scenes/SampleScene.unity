@@ -1137,7 +1137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   maxFood: 5
-  countFood: 2
+  countFood: 0
   rangeBetweenDots: 0
   prefabSpawnDot: {fileID: 6970395470828126028, guid: 02ae85ff4f6f0dc4d96ff10b51e9484d, type: 3}
   foodsPrefabs:

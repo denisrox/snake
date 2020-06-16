@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class SpawnLogic : MonoBehaviour
 {
-    [SerializeField] private GameObject[] foodsPrefabs;//спавн-точка
+    //[SerializeField] private static GameObject[] foodsPrefabs;//спавн-точка
     private GameObject[] spawnDots;
+    [SerializeField] public bool isDotOccupied;
     // Start is called before the first frame update
     void Start()
     {    
         //При создании нового игрового поля вызываем этот метод
         //Берем массив объектов spawnDot
-        spawnDots = GameObject.FindGameObjectsWithTag("SpawnDot");   
+        //spawnDots = GameObject.FindGameObjectsWithTag("SpawnDot");   
         //Выбираем случайный  
         //Проверяем, что он свободен и рядом нет другого элемента (стена может быть[если от стен не отказываемся])
         //Спавним N элементов окружения (камни, шипы, реки(?), подъёмы+мосты+спуски, мосты через реки)
@@ -20,10 +21,10 @@ public class SpawnLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().maxFood > GameObject.FindGameObjectsWithTag("Food").Length)
+        /*if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().maxFood > GameObject.FindGameObjectsWithTag("Food").Length)
         {
             SpawnObject(spawnDots, 1);
-        }
+        }*/
         //При необходимости заспавнить что-то после создания нового игрового поля вызываем этот метод
         //Берем массив объектов spawnDot
         //Выбираем случайный spawnDot
@@ -32,17 +33,24 @@ public class SpawnLogic : MonoBehaviour
         //Если свободен - спавним фрукт
     }
 
-    public void SpawnObject(GameObject[] spawnDots, int countOfSpawn)//, bool isRandomSpawn = true, Object spawnDot = null)
+    public static void SpawnObject(GameObject[] spawnDots, GameObject[] spawnObjects, int countOfSpawn)//, bool isRandomSpawn = true, Object spawnDot = null)
     {
         /*if (isRandomSpawn && spawnDot)
         {
             spawnDot = spawnDots[Random.Range(0, spawnDots.Length)];       
-        }    */
-        
-        GameObject spawnDot = spawnDots[Random.Range(0, spawnDots.Length)];     
+        }    */   
+        GameObject spawnDot;
         for (int i = 0; i < countOfSpawn; i++)         
-        {
-            Instantiate(foodsPrefabs[Random.Range(0, foodsPrefabs.Length)], spawnDot.transform.position, Quaternion.identity);
+        {      
+            spawnDot = spawnDots[Random.Range(0, spawnDots.Length)];       
+            if (!spawnDot.GetComponent<SpawnLogic>().isDotOccupied)
+            {
+                Instantiate(
+                spawnObjects[Random.Range(0, spawnObjects.Length)], 
+                spawnDot.transform.position, 
+                Quaternion.identity);
+                }
+            
         }        
     }
 }
