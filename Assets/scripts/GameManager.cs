@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()//проверяет сколько еды на карте. Если меньше нужного - спавнит
+
     {        
         //foodsPrefabs = GameObject.FindGameObjectsWithTag("Food");
         if (maxFood > countFood)
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
             SpawnLogic.SpawnObject(spawnDots, foodsPrefabs, maxFood - countFood);
             countFood = maxFood;
         }                
+
     }
     
     public void addScore(int newScore) //добавка к счету. Эту функцию вызывает еда перед самоуничтожением

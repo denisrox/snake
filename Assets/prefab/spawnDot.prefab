@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 5780827485064332140}
   - component: {fileID: 8378151075722277870}
   - component: {fileID: 765955631227228877}
+
   - component: {fileID: -8343829840746320448}
+
   m_Layer: 0
   m_Name: spawnDot
   m_TagString: SpawnDot
@@ -96,7 +98,9 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+
 --- !u!114 &-8343829840746320448
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,4 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6c900acf816fd4781a335cc9f9d8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   isDotOccupied: 0
+
