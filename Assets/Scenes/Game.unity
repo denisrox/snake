@@ -1693,10 +1693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d1ac7a7bf14e043a0996383cc67e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 525059499}
-  directionToTurn: 0
-  buttonIsPressed: 0
-  timePreviousPressed: 0
 --- !u!1 &1264198500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1719,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1264198500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9075227357edff344bbb9b2e22f9e4be, type: 3}
+  m_Script: {fileID: 11500000, guid: ebbc76f2c0739914297d37829aa8d713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
@@ -1731,10 +1727,13 @@ MonoBehaviour:
   countFood: 0
   rangeBetweenDots: 0
   prefabSpawnDot: {fileID: 6970395470828126028, guid: 02ae85ff4f6f0dc4d96ff10b51e9484d, type: 3}
+  stepBetweenDots: {x: 1.3, y: 0.5, z: 1.3}
   foodsPrefabs:
   - {fileID: 4299211838981148706, guid: 8c0b03cf007cdd947816e6b102f22ecd, type: 3}
   - {fileID: 1550696892154965255, guid: fba3428360d6fd94fa1c75dc9da75dae, type: 3}
   - {fileID: 5713268559876602420, guid: dfc1001b722b9f74297d0b9e81ee6202, type: 3}
+  stonePrefabs:
+  - {fileID: 110990, guid: 840372b642cf0714da46d91731e60c92, type: 3}
   playMode: 0
   plane: {fileID: 1122270835}
 --- !u!4 &1264198502
@@ -2400,10 +2399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d1ac7a7bf14e043a0996383cc67e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 525059499}
-  directionToTurn: 0
-  buttonIsPressed: 0
-  timePreviousPressed: 0
 --- !u!1 &2041148730
 GameObject:
   m_ObjectHideFlags: 0
