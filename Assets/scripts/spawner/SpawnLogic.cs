@@ -7,6 +7,7 @@ public class SpawnLogic : MonoBehaviour
     //[SerializeField] private static GameObject[] foodsPrefabs;//спавн-точка
     private GameObject[] spawnDots;
     [SerializeField] public bool isDotOccupied;
+    [SerializeField] public Vector3 gridPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,10 @@ public class SpawnLogic : MonoBehaviour
         //Если свободен - спавним фрукт
     }
 
-    public static void SpawnObject(GameObject[] spawnDots, GameObject[] spawnObjects, int countOfSpawn)//, bool isRandomSpawn = true, Object spawnDot = null)
+    public static void SpawnObject(GameObject[] spawnDots, 
+                                   GameObject[] spawnObjects, 
+                                   int countOfSpawn,
+                                   Vector3 freeSpaceAroundDot)//, bool isRandomSpawn = true, Object spawnDot = null)
     {
         /*if (isRandomSpawn && spawnDot)
         {
@@ -42,7 +46,21 @@ public class SpawnLogic : MonoBehaviour
         GameObject spawnDot;
         for (int i = 0; i < countOfSpawn; i++)
         {
-            spawnDot = spawnDots[Random.Range(0, spawnDots.Length)];
+            if (freeSpaceAroundDot.x != 0 &&
+                freeSpaceAroundDot.z != 0)
+                {
+                    spawnDot = spawnDots[Random.Range(0, spawnDots.Length)];
+                    for (int j = -(int)freeSpaceAroundDot.x; j < (int)freeSpaceAroundDot.x; j++)
+                    {
+                        var a = 1;
+                        //Нужно чекнуть, что вокруг доступные ячейки
+                    }
+                }
+            else
+            {
+                spawnDot = spawnDots[Random.Range(0, spawnDots.Length)];
+            }
+            
             if (!spawnDot.GetComponent<SpawnLogic>().isDotOccupied)
             {
                 Instantiate(

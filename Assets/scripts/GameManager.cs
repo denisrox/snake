@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int countFood;//сколько еды сейчас
     [SerializeField] private int rangeBetweenDots;//расстояние между точками спавна
     [SerializeField] private GameObject prefabSpawnDot;//спавн-точка
+    [SerializeField] private Vector3 stepBetweenDots; //расстояние между точками спавна
     [SerializeField] private GameObject[] foodsPrefabs;//массив возможной еды
+    [SerializeField] private GameObject[] stonePrefabs;//массив камней
+    [SerializeField] private Vector3 freeSpaceAroundStone;
     [SerializeField] private int playMode;
     [SerializeField] private GameObject plane;
     private GameObject[] spawnDots;
@@ -23,8 +26,12 @@ public class GameManager : MonoBehaviour
         if (rangeBetweenDots == 0)
             rangeBetweenDots = 1;
         score = 0;
-        createGridSpawn();
+        
+        createGridSpawn(stepBetweenDots);
         spawnDots = GameObject.FindGameObjectsWithTag("SpawnDot");
+
+        //Спавн камней
+        SpawnLogic.SpawnObject(spawnDots, stonePrefabs, 5, freeSpaceAroundStone);
     }
 
     // Update is called once per frame
@@ -33,7 +40,7 @@ public class GameManager : MonoBehaviour
         //foodsPrefabs = GameObject.FindGameObjectsWithTag("Food");
         if (maxFood > countFood)
         {
-            SpawnLogic.SpawnObject(spawnDots, foodsPrefabs, maxFood - countFood);
+            SpawnLogic.SpawnObject(spawnDots, foodsPrefabs, maxFood - countFood, freeSpaceAroundStone);
             countFood = maxFood;
         }
     }
@@ -65,16 +72,21 @@ public class GameManager : MonoBehaviour
         Instantiate(foodsPrefabs[random], position, Quaternion.identity);//создание нового объекта (параметры: объект, позиция, куда смотрит)
     }
 
-    private void createGridSpawn() //создает сетку из раноудаленных невидимых точек
+    private void createGridSpawn(Vector3 stepBetweenDots) //создает сетку из раноудаленных невидимых точек
     {
         Vector3 boundsPlaneMax = plane.GetComponent<Collider>().bounds.max;
         Vector3 boundsPlaneMin = plane.GetComponent<Collider>().bounds.min;
+        Vector3 currentDotPosition = new Vector3(0,0,0);
 
-        for (float x = boundsPlaneMin.x + 1; x < boundsPlaneMax.x - 1; x += rangeBetweenDots) //!!!если поле будет не ровным - переделать
+        for (float x = boundsPlaneMin.x + stepBetweenDots.x; x < boundsPlaneMax.x - stepBetweenDots.x; x += stepBetweenDots.x) //!!!если поле будет не ровным - переделать
         {
-            for (float z = boundsPlaneMin.z + 1; z < boundsPlaneMax.z - 1; z += rangeBetweenDots)
+            currentDotPosition.x++;
+            currentDotPosition.z = 0;
+            for (float z = boundsPlaneMin.z + stepBetweenDots.z; z < boundsPlaneMax.z - stepBetweenDots.z; z += stepBetweenDots.z)
             {
-                Instantiate(prefabSpawnDot, new Vector3(x, boundsPlaneMax.y + 0.5f, z), Quaternion.identity);
+                currentDotPosition.z++;
+                Instantiate(prefabSpawnDot, new Vector3(x, boundsPlaneMax.y + stepBetweenDots.y, z), Quaternion.identity);
+                prefabSpawnDot.GetComponent<SpawnLogic>().gridPosition = currentDotPosition;
             }
         }
 
