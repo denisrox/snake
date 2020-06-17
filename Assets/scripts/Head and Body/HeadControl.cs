@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; //сейчас использую для вывода промежуточный инфы, чтобы дебажить. К релизу в этом классе не должно быть этого
 
 public class HeadControl : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class HeadControl : MonoBehaviour
     public float  stamina;
     public float staminaCurrent;
     public float powerBoost;
-    public Vector3 test;//удалить, ибо эта хрень вообще не нужна.
+    public Text textTest;
+    private bool testCurrent = false;
+    private bool testPrevious = false;
+    //удалить, ибо эта хрень вообще не нужна.
 
     //Крч, для нового движения
     //public Vector3 previousMotionVector;
@@ -36,9 +40,11 @@ public class HeadControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textTest.text = ""+movementSpeed;
+
         Vector3 moveDirection = transform.TransformDirection(Vector3.forward + Vector3.down) * movementSpeed * Time.deltaTime;
         GetComponent<CharacterController>().Move(moveDirection);
-        test = GetComponent<CharacterController>().velocity;
+
         //transform.Translate(Vector3.forward * Time.deltaTime*movementSpeed); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
         //GetComponent<CharacterController>().velocity.sqrMagnitude; скорось в квадрате
 
@@ -54,22 +60,49 @@ public class HeadControl : MonoBehaviour
         {
             BoostSpeedByShift comp= gameObject.AddComponent<BoostSpeedByShift>();
             comp.powerBoost = powerBoost;
-            //movementSpeed = movementSpeed + beginMovementSpeed * 0.2f;
         }
         if (Input.GetKeyUp(boostSpeed))
         {
             if (GetComponent<BoostSpeedByShift>())
                 GetComponent<BoostSpeedByShift>().deleteBuff();
         }
-        
-
-        /*if (onEatFood.lastBody!=gameObject && previousMotionVector!=transform.forward)
+        //управление для телефона
+        if (Input.touchCount > 0)
         {
-            //pointsTrajectory.Enqueue(transform.position);
-            ArrayPointsTrajectory[cointPoints] = transform.position;
-            cointPoints++; 
+            //text.text = "касаний: " + Input.touchCount;
+            if (Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.position.x < Screen.width / 2)
+                    transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+                else
+                    transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+
+                testCurrent = false;
+            }
+            else
+            {
+                testCurrent = true;
+                
+            }
+            
         }
-        previousMotionVector = transform.forward;*/
+
+        if (testCurrent!=testPrevious)
+        {
+            if (testCurrent)
+            {
+                BoostSpeedByShift comp = gameObject.AddComponent<BoostSpeedByShift>();
+                comp.powerBoost = powerBoost;
+            }
+            else
+            {
+                if (GetComponent<BoostSpeedByShift>())
+                    GetComponent<BoostSpeedByShift>().deleteBuff();
+            }
+
+        }
+        testPrevious = testCurrent;
 
     }
     public void turnHead(int directionToTurn)
@@ -77,30 +110,5 @@ public class HeadControl : MonoBehaviour
         transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime* directionToTurn);
     }
 
-    /*void OnTriggerEnter(Collider other) //обработка коллизии с объектов
-    {
-        //!ПРИ СПАВНЕ ИЗ ХВОСТА ТЕПЕРЬ ТАКАЯ РЕАЛИЗАЦИЯ НЕ ПОДХОДИТ!
-        //проверяем, объект, в который мы врезались имеет ли тэг "Body" и так же
-        //проверяем, не является ли это первое тело, которое идёт за головой
-        //т.к. эта тело всегда контактирует с головой
-        if (other.gameObject.tag == "Body" && other.gameObject.GetComponent<BodyLogic>().target!=gameObject)
-        {                                                                                                   
-            if (manager.getPlayMode() == 0)
-            {
-                     GameOver();         
-            }                                                                                                
-            /*if (manager.getPlayMode() == 1)
-            {
-                onEatFood.lastBody = other.gameObject.GetComponent<BodyLogic>().target;
-                //OnEatFood.sizeSnake--;
-                Destroy(other.gameObject);
-            }            
-        }        
-    }
-    private void GameOver()
-    {
-        movementSpeed = 0;
-        Time.timeScale = 0.5f;
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;    
-    }*/
+
 }

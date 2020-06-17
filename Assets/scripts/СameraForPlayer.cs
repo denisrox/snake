@@ -12,6 +12,7 @@ public class СameraForPlayer : MonoBehaviour
     public float speedChangingHeight;
     public int cameraMode;
     private float heightCurrent;
+    private float previousDistancion;
     void Start()
     {
         heightCurrent = heightInitial;
@@ -49,6 +50,23 @@ public class СameraForPlayer : MonoBehaviour
     {
         transform.position = player.transform.position + player.transform.forward * -10  + new Vector3(0, heightCurrent, 0);
         float changeHeight = Input.GetAxis("Mouse ScrollWheel") * -1;
+
+        if (Input.touchCount >= 2)
+        {
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+
+            float difference = currentMagnitude - prevMagnitude;
+
+            changeHeight=difference * 0.001f;
+        }
+
         Debug.Log(changeHeight);
         heightCurrent += changeHeight * Time.deltaTime * speedChangingHeight; ;
         heightCurrent = Mathf.Clamp(heightCurrent, minHeight, maxHeight);

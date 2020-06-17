@@ -98,23 +98,7 @@ public class BodyLogic : MonoBehaviour
         }
 
     }
-    /*void MoveBodyTwo()
-    {
-        if (head.GetComponent<HeadControl>().cointPoints==countPointInBody)
-        {
-            if ((target.transform.position - transform.position).magnitude > 0.8f)
-            {
-                transform.LookAt(target.transform.position);
-                transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().movementSpeed*2);
-                //transform.Translate(Vector3.forward * ((target.transform.position - transform.position).magnitude - 0.8f)); //Time.deltaTime * 4 * head.GetComponent<HeadControl>().movementSpeed);
-            }
 
-        }
-        else
-        {
-            //transform.LookAt()
-        }
-    }*/
     void MoveBodyThree() //из-за того, что мы тут смотрим вектор движения головы, а она всегда вперед, даже когда летит вниз, 
     {                    //то когда голова падает, тело не видит, что меняется направление движения и следует без вейтпоинтов
         if (target == head) //для первой сферы, идущей за головой
@@ -124,16 +108,12 @@ public class BodyLogic : MonoBehaviour
                 if (previousMotionVector == head.GetComponent<CharacterController>().velocity)//head.transform.forward)
                 {
                     movingToPoint(target.transform.position);
-                    /*transform.LookAt(target.transform.position);
-                    transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().movementSpeed * 2);*/
                 }
                 else
                 {
                     TimeWhenChangeWayPoint = Time.time;
                     wayPoint = previousPointHead;
                     isMovingToTarget = movingToPoint(wayPoint);
-                    /*transform.LookAt(wayPoint);
-                    transform.Translate(Vector3.forward * Time.deltaTime * head.GetComponent<HeadControl>().movementSpeed * 2);*/
                 }
             }
             else
