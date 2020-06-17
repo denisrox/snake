@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     // Start is called before the first frame update
-    GameManager manager;
+    public GameManager manager;
     void Start()
     {
         
@@ -15,6 +15,6 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GetComponent<Text>().text = manager.getScore;
+        GetComponent<Text>().text = "Score:"+ manager.score.ToString();
     }
 }
