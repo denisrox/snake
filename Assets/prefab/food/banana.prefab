@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0
-  foodPower: 3
+  foodPower: 25
 --- !u!1001 &7314349064832815022
 PrefabInstance:
   m_ObjectHideFlags: 0

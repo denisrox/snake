@@ -13,13 +13,21 @@ public class HeadControl : MonoBehaviour
     private GameManager manager;
     private OnEatFood onEatFood;
     public Queue<Vector3> pointsTrajectory=new Queue<Vector3>();
-    public List<GameObject> buffs = new List<GameObject>();
+    public List<GameObject> buffs = new List<GameObject>();//вроде не нужно)
     public float  stamina;
     public float staminaCurrent;
     public float powerBoost;
+    public Vector3 test;//удалить, ибо эта хрень вообще не нужна.
+
+    //Крч, для нового движения
+    //public Vector3 previousMotionVector;
+    //public Vector3[] ArrayPointsTrajectory;
+    //public int cointPoints = 0;
     void Start()
     {
-        staminaCurrent=stamina;
+        //ArrayPointsTrajectory = new Vector3[10000];
+        //previousMotionVector = transform.forward;
+        staminaCurrent =stamina;
         movementSpeed = beginMovementSpeed;
         manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         onEatFood = gameObject.GetComponent<OnEatFood>();
@@ -30,6 +38,7 @@ public class HeadControl : MonoBehaviour
     {
         Vector3 moveDirection = transform.TransformDirection(Vector3.forward + Vector3.down) * movementSpeed * Time.deltaTime;
         GetComponent<CharacterController>().Move(moveDirection);
+        test = GetComponent<CharacterController>().velocity;
         //transform.Translate(Vector3.forward * Time.deltaTime*movementSpeed); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
         //GetComponent<CharacterController>().velocity.sqrMagnitude; скорось в квадрате
 
@@ -54,16 +63,20 @@ public class HeadControl : MonoBehaviour
         }
         
 
-        if (onEatFood.lastBody!=gameObject)
+        /*if (onEatFood.lastBody!=gameObject && previousMotionVector!=transform.forward)
         {
-            pointsTrajectory.Enqueue(transform.position);
+            //pointsTrajectory.Enqueue(transform.position);
+            ArrayPointsTrajectory[cointPoints] = transform.position;
+            cointPoints++; 
         }
+        previousMotionVector = transform.forward;*/
 
     }
     public void turnHead(int directionToTurn)
     {
         transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime* directionToTurn);
     }
+
     /*void OnTriggerEnter(Collider other) //обработка коллизии с объектов
     {
         //!ПРИ СПАВНЕ ИЗ ХВОСТА ТЕПЕРЬ ТАКАЯ РЕАЛИЗАЦИЯ НЕ ПОДХОДИТ!
