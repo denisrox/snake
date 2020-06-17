@@ -1,8 +1,5 @@
-﻿using System;
-using System.Transactions;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -32,10 +29,11 @@ public class GameOver : MonoBehaviour
     }
     private void GameOverFunc()
     {
+        SceneManager.LoadScene("Scenes/menu");
         //gameObject.GetComponent<HeadControl>().movementSpeed = 0;
         //Time.timeScale = 0.5f;
         //Time.fixedDeltaTime = Time.timeScale * 0.02f;    
-        transform.parent.GetComponent<HeadControl>().movementSpeed = 0; //Не ставить отрицательное значение (из-за moveDirection в HeadControl полетит вверх)
+        //transform.parent.GetComponent<HeadControl>().movementSpeed = 0; //Не ставить отрицательное значение (из-за moveDirection в HeadControl полетит вверх)
         //transform.parent.GetComponent<HeadControl>().transform.Rotate(UnityEngine.Random.value,UnityEngine.Random.value,0); 
     }
 }
