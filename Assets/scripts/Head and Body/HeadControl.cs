@@ -19,14 +19,9 @@ public class HeadControl : MonoBehaviour
     public float staminaCurrent;
     public float powerBoost;
     public Text textTest;
-    private bool testCurrent = false;
-    private bool testPrevious = false;
-    //удалить, ибо эта хрень вообще не нужна.
-
-    //Крч, для нового движения
-    //public Vector3 previousMotionVector;
-    //public Vector3[] ArrayPointsTrajectory;
-    //public int cointPoints = 0;
+    private bool testCurrent = false; //переименовать как-нить, но пока лень
+    private bool testPrevious = false;//переименовать как-нить, но пока лень
+    public GameObject menu;
     void Start()
     {
         //ArrayPointsTrajectory = new Vector3[10000];
@@ -45,9 +40,7 @@ public class HeadControl : MonoBehaviour
         Vector3 moveDirection = transform.TransformDirection(Vector3.forward + Vector3.down) * movementSpeed * Time.deltaTime;
         GetComponent<CharacterController>().Move(moveDirection);
 
-        //transform.Translate(Vector3.forward * Time.deltaTime*movementSpeed); //движение вперед. Т.к. змея двигается всегда вперед - то будет выполняться каждый кадр.
-        //GetComponent<CharacterController>().velocity.sqrMagnitude; скорось в квадрате
-
+        
         if (Input.GetKey(left))
         {
             transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);// * movementSpeed);//поворот налево
@@ -66,6 +59,12 @@ public class HeadControl : MonoBehaviour
             if (GetComponent<BoostSpeedByShift>())
                 GetComponent<BoostSpeedByShift>().deleteBuff();
         }
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Home))
+        {
+            Time.timeScale = 0;
+            menu.SetActive(true);
+        }
+
         //управление для телефона
         if (Input.touchCount > 0)
         {
@@ -104,6 +103,11 @@ public class HeadControl : MonoBehaviour
         }
         testPrevious = testCurrent;
 
+    }
+    void OnApplicationPause(bool pauseStatus)
+    {
+        Time.timeScale = 0;
+        menu.SetActive(true);
     }
     public void turnHead(int directionToTurn)
     {
