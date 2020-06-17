@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefabSpawnDot;//спавн-точка
     [SerializeField] private GameObject[] foodsPrefabs;//массив возможной еды
     [SerializeField] private int playMode;
-    [SerializeField] private GameObject plane;
+    [SerializeField] private GameObject plane;  
+    private  GameObject[] spawnDots; 
+    
     //Tuple<string, float>[] tuple1 = { new Tuple<string, float>(x_min, 0.0),  new Tuple<string, float>(x_max, 10.0) };
 
     void Start()
@@ -21,18 +23,21 @@ public class GameManager : MonoBehaviour
         if (rangeBetweenDots == 0)
             rangeBetweenDots = 1;
         score = 0;
-        createGridSpawn();        
+        createGridSpawn();  
+        spawnDots = GameObject.FindGameObjectsWithTag("SpawnDot");        
     }
 
     // Update is called once per frame
     void Update()//проверяет сколько еды на карте. Если меньше нужного - спавнит
-    {
-        if (countFood < maxFood)
-        {
-            //var a = new SpawnLogic.SpawnObject();
-            //spawnFood();
-        }
-            
+
+    {        
+        //foodsPrefabs = GameObject.FindGameObjectsWithTag("Food");
+        if (maxFood > countFood)
+        {            
+            SpawnLogic.SpawnObject(spawnDots, foodsPrefabs, maxFood - countFood);
+            countFood = maxFood;
+        }                
+
     }
     
     public void addScore(int newScore) //добавка к счету. Эту функцию вызывает еда перед самоуничтожением

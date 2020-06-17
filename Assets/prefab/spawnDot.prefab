@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 5780827485064332140}
   - component: {fileID: 8378151075722277870}
   - component: {fileID: 765955631227228877}
-  - component: {fileID: 4509187292705212524}
+
+  - component: {fileID: -8343829840746320448}
+
   m_Layer: 0
   m_Name: spawnDot
   m_TagString: SpawnDot
@@ -49,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6970395470828126028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -96,7 +98,9 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4509187292705212524
+
+--- !u!114 &-8343829840746320448
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6c900acf816fd4781a335cc9f9d8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodsPrefabs:
-  - {fileID: 4299211838981148706, guid: 8c0b03cf007cdd947816e6b102f22ecd, type: 3}
-  - {fileID: 1550696892154965255, guid: fba3428360d6fd94fa1c75dc9da75dae, type: 3}
-  - {fileID: 5713268559876602420, guid: dfc1001b722b9f74297d0b9e81ee6202, type: 3}
+
+  isDotOccupied: 0
+
