@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -29,7 +28,7 @@ public class GameOver : MonoBehaviour
     }
     private void GameOverFunc()
     {
-        SceneManager.LoadScene("Scenes/menu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/menu");
         //gameObject.GetComponent<HeadControl>().movementSpeed = 0;
         //Time.timeScale = 0.5f;
         //Time.fixedDeltaTime = Time.timeScale * 0.02f;    
